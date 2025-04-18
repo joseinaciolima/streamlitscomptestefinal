@@ -1,0 +1,13 @@
+[theme]
+base="light"  # Usando o tema claro como base
+primaryColor="#4CAF50"  # Verde aproximado do lado direito
+backgroundColor="#003B58"  # Azul escuro para o fundo principal
+secondaryBackgroundColor="#008000"  # Verde intermediário
+textColor="#FFFFFF"  # Branco para o texto
+
+[browser]
+# Defina o título e o favicon da aba do navegador
+# Título que aparecerá na aba do navegador
+title = "SCOMP"
+# Caminho para o favicon, que deve estar no mesmo diretório ou em um caminho relativo
+favicon = "imagens/logo.png"
