@@ -233,18 +233,11 @@ for buyer in unique_compradores:
     })
 
 results_df = pd.DataFrame(results)
-# 1) Identifica automaticamente todas as colunas numéricas, exceto 'TMC'
-numeric_cols = results_df.select_dtypes(include='number').columns.tolist()
-numeric_cols.remove('TMC')
+# Arredonda TMC para 1 casa decimal
+results_df['TMC'] = results_df['TMC'].round(1)
 
-# 2) Monta o dicionário de formatos:
-fmt = {col: '{:.0f}' for col in numeric_cols}  # zero decimais
-fmt['TMC'] = '{:.1f}'                          # uma casa decimal
-
-# 3) Exibe com o Styler:
-st.dataframe(
-    results_df.style.format(fmt)
-)
+# Exibe o DataFrame sem usar Styler
+st.dataframe(results_df)
 
 st.title("Resultados da Distribuição")
 st.write("A coluna 'Agrupamentos' exibe os códigos distribuídos a cada comprador. A coluna 'QEP' vem do Controle Processos Publicação SCOMP2 (se fornecido).")
