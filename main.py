@@ -6,13 +6,6 @@ st.set_page_config(
     page_icon="imagens/logo.png"  # Caminho para o seu ícone
 )
 
-@st.cache_data
-def carregar_dados():
-    tabela = pd.read_excel("Base.xlsx")
-    return tabela
-
-base = carregar_dados()
-
     
 pg = st.navigation(
     {
