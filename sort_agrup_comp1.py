@@ -233,10 +233,22 @@ for buyer in unique_compradores:
     })
 
 results_df = pd.DataFrame(results)
+# 1) Identifica automaticamente todas as colunas numéricas, exceto 'TMC'
+numeric_cols = results_df.select_dtypes(include='number').columns.tolist()
+numeric_cols.remove('TMC')
+
+# 2) Monta o dicionário de formatos:
+fmt = {col: '{:.0f}' for col in numeric_cols}  # zero decimais
+fmt['TMC'] = '{:.1f}'                          # uma casa decimal
+
+# 3) Exibe com o Styler:
+st.dataframe(
+    results_df.style.format(fmt)
+)
 
 st.title("Resultados da Distribuição")
 st.write("A coluna 'Agrupamentos' exibe os códigos distribuídos a cada comprador. A coluna 'QEP' vem do Controle Processos Publicação SCOMP2 (se fornecido).")
-st.dataframe(results_df)
+
 total_faltante = sum(-row["Desvio"] for idx, row in results_df.iterrows() if row["Desvio"] < 0)
 if total_faltante > 0:
     st.markdown(f"**Faltam {total_faltante} itens para que todos atinjam a meta de 120 itens.**")
